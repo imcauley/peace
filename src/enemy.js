@@ -1,6 +1,6 @@
 class Enemy {
-    constructor() {
-        this.position = vec2(0,0);
+    constructor(position) {
+        this.position = position;
         this.velocity = vec2(0,0);
         this.size = vec2(3,3);
         this.color = new Color(1,1,.2);

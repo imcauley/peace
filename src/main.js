@@ -60,8 +60,6 @@ function gameInit()
     const center = tileCollisionSize.scale(.5).add(vec2(0,9));
 
     context = new GameContext();
-    context.ship = new Ship();
-    context.enemies.push(new Enemy());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -89,6 +87,9 @@ function gameUpdate()
             context.gameStick = vec2(0, 0);
         }
     
+        if(keyIsDown(32)) {
+            context = new GameContext();
+        }
 
     context.update();
 }
@@ -111,7 +112,7 @@ function gameRender()
 ///////////////////////////////////////////////////////////////////////////////
 function gameRenderPost()
 {
-    
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
