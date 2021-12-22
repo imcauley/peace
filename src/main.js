@@ -61,17 +61,33 @@ function gameInit()
 
     context = new GameContext();
     context.ship = new Ship();
-    context.enemies.push(new Bar());
+    context.enemies.push(new Enemy());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 function gameUpdate()
 {
-    if(navigator.getGamepads()) {
-        if(stickData[0]) {
-            context.gameStick = gamepadStick(0,0);
+    // if(navigator.getGamepads()) {
+    //     if(stickData[0]) {
+    //         context.gameStick = gamepadStick(0,0);
+    //     }
+    // }
+    // else {
+        if(keyIsDown(37)) {
+            context.gameStick = vec2(-1, 0);
         }
-    }
+        else if(keyIsDown(38)) {
+            context.gameStick = vec2(0, 1);
+        }
+        else if(keyIsDown(39)) {
+            context.gameStick = vec2(1, 0);
+        }
+        else if(keyIsDown(40)) {
+            context.gameStick = vec2(0, -1);
+        }
+        else {
+            context.gameStick = vec2(0, 0);
+        }
     
 
     if (mouseWasPressed(0))
