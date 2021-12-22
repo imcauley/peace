@@ -3,6 +3,7 @@ class GameContext {
         this.tick = 0;
         this.enemies = [];
         this.ship = 0;
+        this.gameStick = vec2(0,0);
     }
 
     entities() {
@@ -16,6 +17,8 @@ class GameContext {
         this.enemies.forEach(element => {
             element.update(self);
         });
+
+        this.ship.update(self);
     }
 
     draw() {

@@ -13,6 +13,5 @@ class Enemy {
     update(context) {
         this.velocity = context.ship.position.subtract(this.position).scale(.01);
         this.position = this.position.add(this.velocity);
-        // console.log(this.velocity)
     }
 }

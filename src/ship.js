@@ -1,8 +1,9 @@
 class Ship {
     constructor() {
-        this.position = vec2(10,10);
+        this.position = vec2(5,5);
+        this.velocity = vec2(0,0);
         this.size = vec2(3,3);
-        this.color = new Color(.2,1,.2);
+        this.color = new Color(.2,1,1);
     }
 
     draw() {
@@ -10,5 +11,7 @@ class Ship {
     }
 
     update(context) {
+        this.velocity = context.gameStick;
+        this.position = this.position.add(this.velocity);
     }
 }

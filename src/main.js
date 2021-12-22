@@ -60,13 +60,20 @@ function gameInit()
     const center = tileCollisionSize.scale(.5).add(vec2(0,9));
 
     context = new GameContext();
-    context.enemies.push(new Enemy());
     context.ship = new Ship();
+    context.enemies.push(new Bar());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 function gameUpdate()
 {
+    if(navigator.getGamepads()) {
+        if(stickData[0]) {
+            context.gameStick = gamepadStick(0,0);
+        }
+    }
+    
+
     if (mouseWasPressed(0))
     {
         // play sound when mouse is pressed

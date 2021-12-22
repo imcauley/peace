@@ -199,7 +199,7 @@ const debugRender = ()=>
         debugTakeScreenshot = 0;
     }
 
-    if (debugGamepads && gamepadsEnable && navigator.getGamepads)
+    if (true)
     {
         // gamepad debug display
         const gamepads = navigator.getGamepads();
@@ -1913,7 +1913,7 @@ const gamepadWasReleased = (button, gamepad=0)=> keyWasReleased(button, gamepad+
 const gamepadStick = (stick,  gamepad=0)=> stickData[gamepad] ? stickData[gamepad][stick] || vec2() : vec2();
 
 ///////////////////////////////////////////////////////////////////////////////
-// Input update called by engine
+// Input update called by engine     
 
 // store input as a bit field for each key: 1 = isDown, 2 = wasPressed, 4 = wasReleased
 // mouse and keyboard are stored together in device 0, gamepads are in devices > 0
@@ -2018,8 +2018,10 @@ function gamepadsUpdate()
                 v < -deadZone ? -percent(-v, deadZone, deadZoneMax) : 0;
 
             // read analog sticks
-            for (let j = 0; j < gamepad.axes.length-1; j+=2)
+            for (let j = 0; j < gamepad.axes.length-1; j+=2) {
                 sticks[j>>1] = vec2(applyDeadZone(gamepad.axes[j]), applyDeadZone(-gamepad.axes[j+1])).clampLength();
+                // console.log(sticks[0]);
+            }
             
             // read buttons
             for (let j = gamepad.buttons.length; j--;)
