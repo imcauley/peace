@@ -1,6 +1,7 @@
 /*
     LittleJS Hello World Starter Game
 */
+// import Enemy from "./enemy";
 
 'use strict';
 
@@ -67,6 +68,8 @@ function gameInit()
     );
     particleEmiter.elasticity = .3;
     particleEmiter.trailScale = 2;
+
+    let e = new Enemy();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
