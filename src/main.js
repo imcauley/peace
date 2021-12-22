@@ -90,14 +90,6 @@ function gameUpdate()
         }
     
 
-    if (mouseWasPressed(0))
-    {
-        // play sound when mouse is pressed
-        sound_click.play(mousePos);
-
-        // unlock medals
-        medal_example.unlock();
-    }
     context.update();
 }
 
@@ -111,26 +103,15 @@ function gameUpdatePost()
 function gameRender()
 {
     // draw a grey square in the background without using webgl
-    drawRect(cameraPos, tileCollisionSize.add(vec2(5)), new Color(.2,.2,.2), 0, 0);
-    drawRect(vec2(0,0), vec2(20,10), new Color(1,.2,.2), 0, 0);
+    // drawRect(cameraPos, tileCollisionSize.add(vec2(5)), new Color(.2,.2,.2), 0, 0);
+    // drawRect(vec2(0,0), vec2(20,10), new Color(1,.2,.2), 0, 0);
     context.draw();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 function gameRenderPost()
 {
-    // draw to overlay canvas for hud rendering
-    const drawText = (text, x, y, size=70) =>
-    {
-        overlayContext.textAlign = 'center';
-        overlayContext.textBaseline = 'top';
-        overlayContext.font = size + 'px arial';
-        overlayContext.fillStyle = '#fff';
-        overlayContext.lineWidth = 3;
-        overlayContext.strokeText(text, x, y);
-        overlayContext.fillText(text, x, y);
-    }
-    drawText('Hello World', overlayCanvas.width/2, 40);
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////////
