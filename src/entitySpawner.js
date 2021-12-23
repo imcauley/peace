@@ -10,6 +10,6 @@ class EntitySpawner {
 
     spawnEntities() {
         let e = new this.entityType(this.position);
-        return e;
+        return [e];
     }
 }

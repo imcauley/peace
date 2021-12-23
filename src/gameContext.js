@@ -44,8 +44,7 @@ class GameContext {
 
         this.spawners.forEach(spawner => {
             if(spawner.canSpawn(context)) {
-                this.enemies.push(spawner.spawnEntities());
-                // console.log(spawner.spawnEntities());
+                this.enemies.push(...spawner.spawnEntities());
             }
         });
     }
