@@ -3,24 +3,65 @@ class Entity {
         this.position = position;
     }
 
-    getCollisions(context) {
+    move(position, context) {
+        let boundingBox = this.getBoundingBox();
+
+        for (const collidedEntity of this.getCollisions(context)) {
+            if(boundingBox.bottom < collidedEntity.top) {
+                position.y -= collidedEntity.height/2;
+            }
+
+            if(boundingBox.top > collidedEntity.bottom) {
+                position.y += collidedEntity.height/2;
+            }
+
+            if(boundingBox.right < collidedEntity.left) {
+                position.x -= collidedEntity.width/2;
+            }
+
+            if(boundingBox.left > collidedEntity.right) {
+                position.x += collidedEntity.width/2;
+            }
+        }
+
+        this.position = position;
+    }
+
+    * getCollisions(context) {
         let collidesInX, collidesInY;
         let targetBoundingBox;
         let myBoundingBox = this.getBoundingBox();
 
-        let collisions = [];
+        for (const currentEntity of context.enemies) {
+            if(currentEntity === this) {
+                continue;
+            }
 
-        this.newEntities.forEach(currentEntity => {
+            collidesInX, collidesInY = true;
+
+            if(!currentEntity.getBoundingBox) {
+                continue;
+            }
+
             targetBoundingBox = currentEntity.getBoundingBox();
 
-            collidesInX = myBoundingBox.width[0].sub(targetBoundingBox.width[0]) < 0 
-                            && myBoundingBox.width[1].sub(targetBoundingBox.width[1]) < 0;
-            collidesInY = myBoundingBox.height[0].sub(targetBoundingBox.height[0]) < 0 
-                            && myBoundingBox.height[1].sub(targetBoundingBox.height[1]) < 0;
-        
-            collisions.push(currentEntity);
-        })
+            if(myBoundingBox.right < targetBoundingBox.left || myBoundingBox.left > targetBoundingBox.right) {
+                collidesInY = false;
+            }
 
-        return collisions;
+            if(myBoundingBox.top < targetBoundingBox.bottom || myBoundingBox.bottom > targetBoundingBox.top) {
+                collidesInY = false;
+            }
+
+
+            if (collidesInY || collidesInX) {
+                this.color = new Color(1,.2,.2);
+                yield targetBoundingBox;
+            }
+            else {
+                this.color = new Color(1,1,.2);
+            }
+        }
+
     }
 }
