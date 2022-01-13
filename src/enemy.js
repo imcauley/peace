@@ -28,6 +28,6 @@ class Enemy extends Entity {
 
     update(context) {
         this.velocity = context.ship.position.subtract(this.position).scale(.01);
-        this.move(this.position.copy().add(this.velocity), context)
+        this.move(this.position.copy().add(this.velocity), context);
     }
 }
