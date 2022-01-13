@@ -14,6 +14,12 @@ class Ship extends Entity {
         drawRect(this.position, this.size, this.color, 0, 0);
     }
 
+    handleCollision(collidedEntity) {
+        if(collidedEntity.constructor == Enemy) {
+            this.color = new Color(1,.2,.2);
+        }
+    }
+
     getBoundingBox() {
         return {
             left: this.position.x - this.width/2,

@@ -17,6 +17,10 @@ class Enemy extends Entity {
         drawRect(this.position, this.size, this.color, 0, 0);
     }
 
+    handleCollision(collidedEntity) {
+        
+    }
+
     getBoundingBox() {
         return {
             left: this.position.x - this.width/2,

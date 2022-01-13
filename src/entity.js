@@ -7,21 +7,7 @@ class Entity {
         let boundingBox = this.getBoundingBox();
 
         for (const collidedEntity of this.getCollisions(context)) {
-            if(boundingBox.bottom < collidedEntity.top) {
-                position.y -= collidedEntity.height/2;
-            }
-
-            if(boundingBox.top > collidedEntity.bottom) {
-                position.y += collidedEntity.height/2;
-            }
-
-            if(boundingBox.right < collidedEntity.left) {
-                position.x -= collidedEntity.width/2;
-            }
-
-            if(boundingBox.left > collidedEntity.right) {
-                position.x += collidedEntity.width/2;
-            }
+            this.handleCollision(collidedEntity);
         }
 
         this.position = position;
@@ -55,11 +41,7 @@ class Entity {
 
 
             if (collidesInY || collidesInX) {
-                this.color = new Color(1,.2,.2);
-                yield targetBoundingBox;
-            }
-            else {
-                this.color = new Color(1,1,.2);
+                yield currentEntity;
             }
         }
 
