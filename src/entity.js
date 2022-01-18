@@ -5,25 +5,24 @@ class Entity {
 
     move(position, context) {
         let boundingBox = this.getBoundingBox();
+        this.position = position;
 
         for (const collidedEntity of this.getCollisions(context)) {
             this.handleCollision(collidedEntity);
         }
-
-        this.position = position;
     }
 
     * getCollisions(context) {
-        let collidesInX, collidesInY;
+        let collides;
         let targetBoundingBox;
         let myBoundingBox = this.getBoundingBox();
 
-        for (const currentEntity of context.enemies) {
+        for (const currentEntity of context.entities()) {
+            collides = false;
+
             if(currentEntity === this) {
                 continue;
             }
-
-            collidesInX, collidesInY = true;
 
             if(!currentEntity.getBoundingBox) {
                 continue;
@@ -31,17 +30,16 @@ class Entity {
 
             targetBoundingBox = currentEntity.getBoundingBox();
 
-            if(myBoundingBox.right < targetBoundingBox.left || myBoundingBox.left > targetBoundingBox.right) {
-                collidesInY = false;
-            }
-
-            if(myBoundingBox.top < targetBoundingBox.bottom || myBoundingBox.bottom > targetBoundingBox.top) {
-                collidesInY = false;
-            }
-
-
-            if (collidesInY || collidesInX) {
-                yield currentEntity;
+            if(
+                myBoundingBox.left < targetBoundingBox.right &&
+                myBoundingBox.right > targetBoundingBox.left &&
+                myBoundingBox.bottom < targetBoundingBox.top &&
+                myBoundingBox.top > targetBoundingBox.bottom 
+            ) {
+                yield {
+                    entity: currentEntity,
+                    direction: 'y'
+                };
             }
         }
 
