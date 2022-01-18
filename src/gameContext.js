@@ -14,7 +14,7 @@ class GameContext {
     }
 
     entities() {
-        return this.enemies;
+        return this.enemies.concat([this.ship]);
     }
 
     update() {
@@ -22,21 +22,17 @@ class GameContext {
 
         this.spawnNewEntities();
 
-        this.enemies.forEach(element => {
+        this.entities().forEach(element => {
             element.update(self);
         });
-
-        this.ship.update(self);
 
         this.tick += 1;
     }
 
     draw() {
-        this.enemies.forEach(element => {
+        this.entities().forEach(element => {
             element.draw();
         });
-
-        this.ship.draw();
     }
 
     spawnNewEntities() {
